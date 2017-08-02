@@ -28,6 +28,11 @@ object Boot extends App {
     }
   
   val bindingFuture = Http().bindAndHandle(route, Config.AppConfig.interface, Config.AppConfig.port)
+    .map(_ => println("Bind Successfully"))
+    .recover { case ex =>
+        println("Bind Failed")
+        ex.printStackTrace()
+    }
   
   println(s"Server online at http://${Config.AppConfig.interface}:${Config.AppConfig.port}/\nPress RETURN to stop...")
   StdIn.readLine() // let it run until user presses return
