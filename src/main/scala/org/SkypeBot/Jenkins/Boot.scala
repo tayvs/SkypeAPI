@@ -6,8 +6,8 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
-
 import scala.io.StdIn
+import scala.util.{Failure, Success}
 
 object Boot extends App {
   
@@ -28,8 +28,9 @@ object Boot extends App {
     }
   
   val bindingFuture = Http().bindAndHandle(route, Config.AppConfig.interface, Config.AppConfig.port)
-    .map(_ => println("Bind Successfully"))
-    .recover { case ex =>
+    .andThen {
+      case Success(_) => println("Bind Successfully")
+      case Failure(ex) =>
         println("Bind Failed")
         ex.printStackTrace()
     }
