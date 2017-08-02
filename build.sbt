@@ -1,4 +1,4 @@
-name := "SkypeAPI"
+normalizedName := "SkypeAPI"
 
 scalaVersion := "2.12.1"
 
