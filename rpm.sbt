@@ -33,8 +33,6 @@ bashScriptExtraDefines ++= Seq(
   """addJava "-Dlogback.configurationFile=${app_home}/../conf/logback.xml""""
 )
 
-credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
-
 pomIncludeRepository := { _ => false }
 publishMavenStyle := true
 publishArtifact in Test := false
