@@ -9,7 +9,7 @@ import akka.stream.ActorMaterializer
 
 import scala.io.StdIn
 
-object Main extends App {
+object Boot extends App {
   
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
@@ -27,7 +27,7 @@ object Main extends App {
       }
     }
   
-  val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
+  val bindingFuture = Http().bindAndHandle(route, Config.AppConfig.interface, Config.AppConfig.port)
   
   println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
   StdIn.readLine() // let it run until user presses return
